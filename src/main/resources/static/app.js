@@ -21,8 +21,7 @@ async function api(path, options = {}) {
   log(`${res.status} ${options.method || "GET"} ${path}`, data);
   return data;
 }
-
-// ----- Cargar usuarios y vehiculos en los desplegables -----
+//con esto cargamos los usuarios y los vehículos en los desplegables
 async function cargarSelects() {
   try {
     const [usuarios, vehiculos] = await Promise.all([
@@ -31,8 +30,8 @@ async function cargarSelects() {
     ]);
 
     const conductorSel = document.querySelector('#form-publicar [name="conductorId"]');
-    const pasajeroSel  = document.querySelector('#form-reservar [name="pasajeroId"]');
-    const vehiculoSel  = document.querySelector('#form-publicar [name="vehiculoId"]');
+    const pasajeroSel = document.querySelector('#form-reservar [name="pasajeroId"]');
+    const vehiculoSel = document.querySelector('#form-publicar [name="vehiculoId"]');
 
     [conductorSel, pasajeroSel].forEach(sel => {
       sel.innerHTML = usuarios
@@ -47,31 +46,31 @@ async function cargarSelects() {
   }
 }
 
-// ----- Publicar viaje -----
+// publicaciones de viajes
 document.getElementById("form-publicar").addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = e.target;
   const viaje = {
-    origen:      f.origen.value,
-    destino:     f.destino.value,
-    fecha:       f.fecha.value,
-    plazas:      Number(f.plazas.value),
-    precio:      Number(f.precio.value),
-    mascotas:    f.mascotas.checked,
-    ninos:       f.ninos.checked,
+    origen: f.origen.value,
+    destino: f.destino.value,
+    fecha: f.fecha.value,
+    plazas: Number(f.plazas.value),
+    precio: Number(f.precio.value),
+    mascotas: f.mascotas.checked,
+    ninos: f.ninos.checked,
     soloMujeres: f.soloMujeres.checked,
-    paradas:     f.paradas.checked,
-    conductor:   { id: Number(f.conductorId.value) },
-    vehiculo:    { id: Number(f.vehiculoId.value) },
+    paradas: f.paradas.checked,
+    conductor: { id: Number(f.conductorId.value) },
+    vehiculo: { id: Number(f.vehiculoId.value) },
   };
   try {
     await api("/viajes", { method: "POST", body: JSON.stringify(viaje) });
     f.reset();
     listarTodos();
-  } catch {}
+  } catch { }
 });
 
-// ----- Buscar viajes -----
+//Buscador de viajes
 document.getElementById("form-buscar").addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = e.target;
@@ -79,7 +78,7 @@ document.getElementById("form-buscar").addEventListener("submit", async (e) => {
   try {
     const viajes = await api(url);
     pintarViajes(viajes);
-  } catch {}
+  } catch { }
 });
 
 document.getElementById("btn-listar-todos").addEventListener("click", listarTodos);
@@ -88,7 +87,7 @@ async function listarTodos() {
   try {
     const viajes = await api("/viajes");
     pintarViajes(viajes);
-  } catch {}
+  } catch { }
 }
 
 function pintarViajes(viajes) {
@@ -126,10 +125,10 @@ document.querySelector("#tabla-viajes tbody").addEventListener("click", async (e
       await api(`/viajes/${id}/estadoFinalizado`, { method: "PUT" });
     }
     listarTodos();
-  } catch {}
+  } catch { }
 });
 
-// ----- Reservar -----
+//reserva de viajes
 document.getElementById("form-reservar").addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = e.target;
@@ -143,8 +142,7 @@ document.getElementById("form-reservar").addEventListener("submit", async (e) =>
       body: JSON.stringify(reserva),
     });
     listarTodos();
-  } catch {}
+  } catch { }
 });
 
-// Arranque
 cargarSelects().then(listarTodos);
