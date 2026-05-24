@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Coche Compartido</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Coche Compartido</h1>
+  <p class="subtitle">Frontend de pruebas para el backend Spring Boot</p>
+</header>
+
+<main>
+
+  <section class="card">
+    <h2>1. Publicar viaje</h2>
+    <form id="form-publicar">
+      <div class="row">
+        <label>Origen <input name="origen" required></label>
+        <label>Destino <input name="destino" required></label>
+        <label>Fecha <input name="fecha" type="date" required></label>
+      </div>
+      <div class="row">
+        <label>Plazas <input name="plazas" type="number" min="1" value="4" required></label>
+        <label>Precio (&euro;) <input name="precio" type="number" step="0.01" value="20" required></label>
+        <label>Conductor
+          <select name="conductorId" required></select>
+        </label>
+        <label>Veh&iacute;culo
+          <select name="vehiculoId" required></select>
+        </label>
+      </div>
+      <div class="row checks">
+        <label><input type="checkbox" name="mascotas"> Mascotas</label>
+        <label><input type="checkbox" name="ninos"> Ni&ntilde;os</label>
+        <label><input type="checkbox" name="soloMujeres"> Solo mujeres</label>
+        <label><input type="checkbox" name="paradas"> Paradas</label>
+      </div>
+      <button type="submit">Publicar</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>2. Buscar viajes</h2>
+    <form id="form-buscar" class="row">
+      <label>Origen <input name="origen" required></label>
+      <label>Destino <input name="destino" required></label>
+      <button type="submit">Buscar</button>
+      <button type="button" id="btn-listar-todos">Listar todos</button>
+    </form>
+    <table id="tabla-viajes">
+      <thead>
+        <tr>
+          <th>ID</th><th>Origen</th><th>Destino</th><th>Fecha</th>
+          <th>Plazas</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>3. Reservar</h2>
+    <form id="form-reservar" class="row">
+      <label>ID viaje <input name="viajeId" type="number" required></label>
+      <label>Plazas <input name="plazas" type="number" min="1" value="1" required></label>
+      <label>Pasajero
+        <select name="pasajeroId" required></select>
+      </label>
+      <button type="submit">Reservar</button>
+    </form>
+  </section>
+
+  <section class="card log">
+    <h2>Respuestas del servidor</h2>
+    <pre id="log"></pre>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

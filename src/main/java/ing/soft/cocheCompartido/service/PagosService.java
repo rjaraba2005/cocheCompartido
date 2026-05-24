@@ -19,7 +19,7 @@ public class PagosService {
     }
 
     public boolean procesarPago(Long idReferencia){
-        System.out.println("Pagos: reembolsando dinero del viaje con ID: " + idReferencia);
+        System.out.println("Pagos: procesando pago al conductor del viaje con ID: " + idReferencia);
         return true;
     }
 }

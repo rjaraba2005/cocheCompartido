@@ -1,9 +1,10 @@
 package ing.soft.cocheCompartido.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity 
+@Entity
 public class Usuario {
 
     @Id 
@@ -18,10 +19,12 @@ public class Usuario {
 
     // Un conductor puede tener muchos viajes
     @OneToMany(mappedBy = "conductor")
+    @JsonIgnore
     private List<Viaje> viajesPublicados;
 
     // Un pasajero puede tener muchas reservas
     @OneToMany(mappedBy = "pasajero")
+    @JsonIgnore
     private List<Reserva> reservas;
 
     public Usuario() {

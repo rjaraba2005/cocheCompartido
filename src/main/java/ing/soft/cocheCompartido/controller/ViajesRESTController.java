@@ -5,6 +5,8 @@ import ing.soft.cocheCompartido.service.ViajesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 // Utilizamos esta clase como controller
 @RestController 
 public class ViajesRESTController {
@@ -38,7 +40,17 @@ public class ViajesRESTController {
 
     @GetMapping("/viajes/buscar")
     // Usamos RequestParam para extraer los datos de consulta del usuario
-    public java.util.List<Viaje> buscarViajes(@RequestParam String origen, @RequestParam String destino) {
+    public List<Viaje> buscarViajes(@RequestParam String origen, @RequestParam String destino) {
         return viajesService.buscarViajes(origen, destino);
+    }
+
+    @GetMapping("/viajes")
+    public List<Viaje> listarViajes() {
+        return viajesService.listarViajes();
+    }
+
+    @GetMapping("/viajes/{id}")
+    public Viaje obtenerViaje(@PathVariable Long id) {
+        return viajesService.obtenerViaje(id);
     }
 }

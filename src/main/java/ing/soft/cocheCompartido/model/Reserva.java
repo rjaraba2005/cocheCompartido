@@ -10,7 +10,9 @@ public class Reserva {
     private Long id;
 
     private Integer plazas;
-    private String estado; 
+
+    @Enumerated(EnumType.STRING)
+    private EstadoReserva estado;
 
     // Un pasajero puede tener varias reservas
     @ManyToOne
@@ -42,11 +44,11 @@ public class Reserva {
         this.plazas = plazas;
     }
 
-    public String getEstado() {
+    public EstadoReserva getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoReserva estado) {
         this.estado = estado;
     }
 

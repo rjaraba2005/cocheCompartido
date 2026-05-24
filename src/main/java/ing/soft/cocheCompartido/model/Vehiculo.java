@@ -1,5 +1,6 @@
 package ing.soft.cocheCompartido.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Vehiculo {
 
     // Un vehiculo para muchos viajes
     @OneToMany(mappedBy = "vehiculo")
+    @JsonIgnore
     private List<Viaje> viajes;
 
     public Vehiculo() {

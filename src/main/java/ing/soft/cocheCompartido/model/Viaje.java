@@ -23,8 +23,9 @@ public class Viaje {
     private Boolean ninos;
     private Boolean soloMujeres;
     private Boolean paradas;
-    
-    private EstadoViaje estado; 
+
+    @Enumerated(EnumType.STRING)
+    private EstadoViaje estado;
 
     // Varios viajes de un conductor
     @ManyToOne

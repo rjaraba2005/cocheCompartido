@@ -71,4 +71,13 @@ public class ViajesService {
     public List<Viaje> buscarViajes(String origen, String destino) {
         return viajeRepository.findByOrigenAndDestino(origen, destino);
     }
+
+    public List<Viaje> listarViajes() {
+        return viajeRepository.findAll();
+    }
+
+    public Viaje obtenerViaje(Long viajeId) {
+        return viajeRepository.findById(viajeId).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el viaje con ID: " + viajeId));
+    }
 }

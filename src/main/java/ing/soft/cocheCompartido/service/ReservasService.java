@@ -1,5 +1,6 @@
 package ing.soft.cocheCompartido.service;
 
+import ing.soft.cocheCompartido.model.EstadoReserva;
 import ing.soft.cocheCompartido.model.Reserva;
 import ing.soft.cocheCompartido.model.Viaje;
 import ing.soft.cocheCompartido.repository.ReservaRepository;
@@ -41,7 +42,7 @@ public class ReservasService {
         viajeRepository.save(viaje);
 
         // Confirmamos la reserva y la asociamos al viaje
-        nuevaReserva.setEstado("Confirmada");
+        nuevaReserva.setEstado(EstadoReserva.CONFIRMADA);
         nuevaReserva.setViaje(viaje);
 
         // retenemos el dinero de la reserva
